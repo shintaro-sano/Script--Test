@@ -2,43 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Test : MonoBehaviour
-{
-    //  Use this for initialization
-    void Start()
-    {
-        // 要素数５の配列を初期化する
-        int[] array = new int[5];
-
-        //　配列の各要素に値を代入する
-        array[0] = 1;
-        array[1] = 2;
-        array[2] = 3;
-        array[3] = 4;
-        array[4] = 5;
-
-        //　配列の要素をすべて表示する
-        for (int a = 0; a < 5; a++)
-        {
-            Debug.Log(array[a]);
-        }
-        for (int b = 4; b >= 0; b--)
-        {
-            Debug.Log(array[b]);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-}
-
-public class Boss
+public class Boss 
 {
     private int hp = 100;          // 体力
-    private int power =25; // 攻撃力
+    private int power = 25; // 攻撃力
+    private int mp = 53; //マジックポイント
 
     // 攻撃用の関数
     public void Attack()
@@ -50,24 +18,46 @@ public class Boss
     public void Defence(int damage)
     {
         Debug.Log(damage + "のダメージを受けた");
-        //のこりHPを減らす
+        // 残りhpを減らす
         this.hp -= damage;
     }
 
+    //魔法の関数
+    public void Magic(int point)
+    {
+        if (mp >= 5)
+        {
+            Debug.Log("ｍｐが足りないため、魔法が使えない");
+        }
+        else
+        {
+            Debug.Log("魔法攻撃をした、残りｈｐは○○");
+            //　残りmpを減らす
+            this.mp -= point;
+        }
+    }
+
+    
+
 }
 
-public class Test: MonoBehaviour
+public class Test : MonoBehaviour
 {
 
     void Start()
     {
-        //Bossクラスの変数を宣言してインスタンスを代入
+        // Bossクラスの変数を宣言してインスタンスを代入
         Boss lastboss = new Boss();
 
-        //攻撃用の関数を呼び出す
+        // 攻撃用の関数を呼び出す
         lastboss.Attack();
-        //防御用の関数を呼び出す
+        // 防御用の関数を呼び出す
         lastboss.Defence(3);
+        // 魔法用の関数を呼び出す
+        for (int a = 0; a < 11; a++)
+        {
+            lastboss.Magic(5);
+        }
     }
 
     // Update is called once per frame
